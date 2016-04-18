@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Node.js Hello World for OpenShift 3",
   "main": "helloworld.js",
+  "dependencies": {
+    "ejs": "^2.4.1"
+  },
   "scripts": {
     "start": "node helloworld.js",
   },
