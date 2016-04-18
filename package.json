@@ -6,6 +6,10 @@
   "dependencies": {
     "ejs": "^2.4.1"
   },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
   "scripts": {
     "start": "node helloworld.js",
   },
