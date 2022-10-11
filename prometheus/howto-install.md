@@ -3,12 +3,13 @@
 This is the source: https://learn.microsoft.com/en-us/azure/openshift/howto-deploy-prometheus
 
 it creates 3 clusters: a prometheus and two app clusters to monitor
-
+###Clean-up
 oc delete project monitoring
 oc delete  project prometheus-project
 oc delete  project app-project1
 oc delete  project app-project2
 
+###create 3 new namespaces
 oc new-project prometheus-project
 oc new-project app-project1
 oc new-project app-project2
@@ -30,9 +31,13 @@ oc new-project app-project2
 
 oc create secret generic prom --from-file=prometheus.yml -n prometheus-project
 
-oc create secret generic prom-alerts --from-file=alertmanager.yml -n prometheus-project
 
-oc process -f prometheus-standalone.yaml | oc apply -f - -n prometheus-project
+oc create secret generic prom-alerts --from-file=alertmanager.yml -n prometheus-project
+###Make sure you download the same prometheus stahdalone file 
+> oc version
+
+``oc process -f prometheus-standalone.yaml | oc apply -f - -n prometheus-project
+
 
 **To verify if the prom StatefulSet has equal DESIRED and CURRENT number replicas, run the 
 
