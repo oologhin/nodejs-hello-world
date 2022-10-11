@@ -39,12 +39,11 @@ oc create secret generic prom-alerts --from-file=alertmanager.yml -n prometheus-
 
     oc process -f prometheus-standalone.yaml | oc apply -f - -n prometheus-project
 
-
-**To verify if the prom StatefulSet has equal DESIRED and CURRENT number replicas, run the 
+### To verify if the prom StatefulSet has equal DESIRED and CURRENT number replicas, run the 
 
     oc get statefulset -n prometheus-project 
 
-**To check all resources in the project, run the 
+### To check all resources in the project, run the 
 
     oc get all -n prometheus-project command.
 
