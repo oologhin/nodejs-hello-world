@@ -29,14 +29,15 @@ oc new-project app-project2
                     kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
                 */
 
+### Create two new keys
 oc create secret generic prom --from-file=prometheus.yml -n prometheus-project
-
-
 oc create secret generic prom-alerts --from-file=alertmanager.yml -n prometheus-project
-###Make sure you download the same prometheus stahdalone file 
-> oc version
 
-``oc process -f prometheus-standalone.yaml | oc apply -f - -n prometheus-project
+
+### Make sure you download the same prometheus stahdalone file 
+    oc version
+
+    oc process -f prometheus-standalone.yaml | oc apply -f - -n prometheus-project
 
 
 **To verify if the prom StatefulSet has equal DESIRED and CURRENT number replicas, run the 
