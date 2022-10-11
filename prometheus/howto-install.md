@@ -33,7 +33,7 @@ oc new-project app-project2
 oc create secret generic prom --from-file=prometheus.yml -n prometheus-project
 oc create secret generic prom-alerts --from-file=alertmanager.yml -n prometheus-project
 
-
+## Deploy Prometheus
 ### Make sure you download the same prometheus stahdalone file 
     oc version
 
@@ -47,6 +47,7 @@ oc create secret generic prom-alerts --from-file=alertmanager.yml -n prometheus-
 
     oc get all -n prometheus-project command.
 
+## Add permissions to allow service discovery
 apply template to all projects
 
 oc process -f prometheus-sdrole.yml | oc apply -f - -n app-project1
