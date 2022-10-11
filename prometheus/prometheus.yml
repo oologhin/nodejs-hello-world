@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 5s
+
+scrape_configs:
+    - job_name: prom-sd
+      scrape_interval: 30s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      kubernetes_sd_configs:
+      - api_server: null
+        role: endpoints
+        namespaces:
+          names:
+          - prometheus-project
+          - app-project1
+          - app-project2

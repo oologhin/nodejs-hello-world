@@ -1,0 +1,42 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: prometheus-sdrole
+  annotations:
+    "openshift.io/display-name": Prometheus service discovery role
+    description: |
+      Role and rolebinding added permissions required for service discovery in a given project.
+    iconClass: fa fa-cogs
+    tags: "monitoring,prometheus,alertmanager,time-series"
+parameters:
+- description: The project name, where a standalone Prometheus is deployed
+  name: PROMETHEUS_PROJECT
+  value: prometheus-project
+objects:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    name: prometheus-sd
+  rules:
+  - apiGroups:
+    - ""
+    resources:
+    - services
+    - endpoints
+    - pods
+    verbs:
+    - list
+    - get
+    - watch
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: prometheus-sd
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: prometheus-sd
+  subjects:
+  - kind: ServiceAccount
+    name: prom
+    namespace: ${PROMETHEUS_PROJECT}
